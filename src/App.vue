@@ -1,15 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="my-app">
+    <AppHeader/>
+    <div>
+      <div v-for="(bug, index) in bugsData" :key="index">
+        <CreatureCard 
+        :name="bug['name']['name-EUfr']" 
+        :picture="bug['image_uri']"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CreatureCard from './components/Creature.vue'
+import AppHeader from './components/AppHeader.vue'
+import {getBugsData} from '@/services/api/acnhAPI.js'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CreatureCard,
+    AppHeader,
+  },
+  data() {
+    return {
+        bugsData: []
+    }
+  },
+  created: function() {
+    this.retrieveBugsData()
+  },
+  methods: {
+      async retrieveBugsData() {
+        this.bugsData = await getBugsData();
+        console.log(this.bugsData);
+      }
   }
 }
 </script>
