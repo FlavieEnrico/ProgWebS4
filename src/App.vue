@@ -1,11 +1,19 @@
 <template>
   <div class="my-app">
     <AppHeader/>
-    <div>
-      <div v-for="(bug, index) in bugsData" :key="index">
+    <div class="collection">
+      <div class="collection-options">
+				<input type="text" v-model="search" placeholder="Chercher une bébête">
+        <label for="bug-sort">Trier par : </label>
+				<select v-model="bugsSortType" id="bug-sort">
+          <option value="AZName">Noms de A à Z</option>
+          <option value="ZAName">Noms de Z à A</option>
+				</select>
+      </div>
+      <div class="card" v-for="(bug, index) in bugsData" :key="index">
         <CreatureCard 
         :name="bug['name']['name-EUfr']" 
-        :picture="bug['image_uri']"
+        :picture="bug['icon_uri']"
         />
       </div>
     </div>
@@ -26,7 +34,9 @@ export default {
   },
   data() {
     return {
-        bugsData: []
+        bugsData: [],
+        search: "",
+        bugsSortType: "AZName"
     }
   },
   created: function() {
@@ -42,6 +52,10 @@ export default {
 </script>
 
 <style>
+html {
+  background-color: palegoldenrod;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -49,5 +63,27 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.collection {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: white;
+  border-radius: 25px;
+  margin:25px;
+}
+
+.collection-options {
+  width:100%;
+  margin: 20px;
+}
+
+.card {
+  width: 15%;
+  box-shadow: 0px 0px 10px lightgrey;
+  border-radius: 25px;
+  margin: 20px;
+  padding: 10px;
 }
 </style>

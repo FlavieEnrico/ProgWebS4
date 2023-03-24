@@ -1,6 +1,6 @@
 <template>
     <div class="app-header">
-        <h1>COUCOU</h1>
+        <h1>La bébêtopédie ACNH</h1>
     </div>
 </template>
 
@@ -12,6 +12,6 @@
 
 <style scoped>
     h1 {
-        color:chartreuse;
+        color: #404040;
     }
 </style>
