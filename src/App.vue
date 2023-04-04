@@ -4,11 +4,13 @@
     <div class="collection">
       <div class="collection-options">
 				<input type="text" v-model="search" placeholder="Chercher une bébête">
+        <button v-if="search" @click="cleanSearch">X</button>
         <label for="bug-sort">Trier par : </label>
 				<select v-model="bugsSortType" id="bug-sort">
           <option value="AZName">Noms de A à Z</option>
           <option value="ZAName">Noms de Z à A</option>
 				</select>
+        
       </div>
       <div class="card" v-for="(bug, index) in bugsData" :key="index">
         <CreatureCard 
@@ -46,7 +48,10 @@ export default {
       async retrieveBugsData() {
         this.bugsData = await getBugsData();
         console.log(this.bugsData);
-      }
+      },
+      cleanSearch: function() {
+      this.search = ""
+		}	
   }
 }
 </script>
