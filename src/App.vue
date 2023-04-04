@@ -36,12 +36,12 @@ export default {
   },
   computed: {
 		bugsOrganizedData: function() {
-  const field = ["AZName", "ZAName"].includes(this.bugsSortType) ? "name" : "name"
-  const reversed = ["ZAName", "ZAName"].includes(this.bugsSortType) ? -1 : 1
-  return this.bugsData
-    .filter((a) => a.name.toLowerCase().includes(this.search.toLowerCase()))
-    .sort((a, b) => a[field].localeCompare(b[field]) * reversed)
-}
+      //const field = ["AZName"].includes(this.bugsSortType) ? "name" : "name"
+      const reversed = ["ZAName"].includes(this.bugsSortType) ? -1 : 1
+      return this.bugsData
+        .filter((a) => a.name.toLowerCase().includes(this.search.toLowerCase()))
+        .sort((a, b) => a.name.localeCompare(b.name) * reversed)
+    }
 	},
   data() {
     return {
@@ -96,9 +96,15 @@ html {
 
 .card {
   width: 15%;
-  box-shadow: 0px 0px 10px lightgrey;
-  border-radius: 25px;
   margin: 20px;
   padding: 10px;
+  box-shadow: 0px 0px 10px lightgrey;
+  border-radius: 25px;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
 }
 </style>

@@ -2,7 +2,7 @@
     <div class="creature-card">
         <img class="picture" :src="picture">
         <div>
-        <a href="" class="name">{{name || 'Unknown name'}}</a>
+        <a href="" class="name">{{capitalizeString(name) || 'Unknown name'}}</a>
         </div>  
     </div>
 </template>
@@ -14,13 +14,27 @@
             name: {type: String, default:""},
             picture: {type:String, default:""}
         },
+        methods: {
+            capitalizeString(str) {
+            // split the string into an array of words
+            let words = str.split(" ");
+        
+            // iterate through each word and capitalize the first letter
+            for (let i = 0; i < words.length; i++) {
+            let word = words[i];
+            words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+            }
+        
+            // join the words back together into a single string
+            return words.join(" ");
+            }
+        }
     }
 </script>
 
 <style scoped>
     .picture {
-        width:10em;
-        height:10em;
+        width:50%;
     }
     .creature-card {
         text-align: center;
