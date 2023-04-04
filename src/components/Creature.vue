@@ -2,7 +2,7 @@
     <div class="creature-card">
         <img class="picture" :src="picture">
         <div>
-        <a href="" class="name">{{name}}</a>
+        <a href="" class="name">{{name || 'Unknown name'}}</a>
         </div>  
     </div>
 </template>
@@ -11,7 +11,7 @@
     export default {
         name: 'CreatureCard',
         props: {
-            name: {type: String, required: true},
+            name: {type: String, default:""},
             picture: {type:String, default:""}
         },
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="app-header">
-        <h1>La bébêtopédie ACNH</h1>
+        <h1>ACNH Critterpedia</h1>
     </div>
 </template>
 

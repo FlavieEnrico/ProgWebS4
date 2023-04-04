@@ -1,7 +1,8 @@
 const getBugsData = async function() {
     const response = await fetch("https://acnhapi.com/v1/bugs")
     if (response.status == 200) {
-        return response.json()
+        const data = await response.json()
+        return Object.values(data).map(bug => ({...bug, name: bug.name["name-USen"] + ""}))
     } else {
         throw new Error(response.statusText)
     }

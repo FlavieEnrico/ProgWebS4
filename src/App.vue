@@ -3,18 +3,18 @@
     <AppHeader/>
     <div class="collection">
       <div class="collection-options">
-				<input type="text" v-model="search" placeholder="Chercher une bébête">
+				<input type="text" v-model="search" placeholder="Find a critter">
         <button v-if="search" @click="cleanSearch">X</button>
-        <label for="bug-sort">Trier par : </label>
+        <label for="bug-sort">Order by : </label>
 				<select v-model="bugsSortType" id="bug-sort">
-          <option value="AZName">Noms de A à Z</option>
-          <option value="ZAName">Noms de Z à A</option>
+          <option value="AZName">Names from A to Z</option>
+          <option value="ZAName">Names from Z to A</option>
 				</select>
         
       </div>
-      <div class="card" v-for="(bug, index) in bugsData" :key="index">
+      <div class="card" v-for="(bug, index) in bugsOrganizedData" :key="index">
         <CreatureCard 
-        :name="bug['name']['name-EUfr']" 
+        :name="bug['name']" 
         :picture="bug['icon_uri']"
         />
       </div>
@@ -34,6 +34,15 @@ export default {
     CreatureCard,
     AppHeader,
   },
+  computed: {
+		bugsOrganizedData: function() {
+  const field = ["AZName", "ZAName"].includes(this.bugsSortType) ? "name" : "name"
+  const reversed = ["ZAName", "ZAName"].includes(this.bugsSortType) ? -1 : 1
+  return this.bugsData
+    .filter((a) => a.name.toLowerCase().includes(this.search.toLowerCase()))
+    .sort((a, b) => a[field].localeCompare(b[field]) * reversed)
+}
+	},
   data() {
     return {
         bugsData: [],
@@ -77,6 +86,7 @@ html {
   background-color: white;
   border-radius: 25px;
   margin:25px;
+  height: 90%;
 }
 
 .collection-options {
