@@ -21,7 +21,7 @@
         :picture="bug['icon_uri']"
         />
       </div>
-      <div v-if="bugsOrganizedData.length==0" id="if-no-bugs">
+      <div v-if="bugsOrganizedData.length==0" class="if-no-bugs">
         No Match found.
       </div>
     </div>
@@ -111,6 +111,7 @@ a {
   width:100%;
   margin: 20px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
@@ -130,6 +131,12 @@ a {
 .card:hover {
   text-decoration: underline;
   box-shadow: 0px 0px 10px #2c3e50;
+}
+
+.if-no-bugs {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 600px) {
