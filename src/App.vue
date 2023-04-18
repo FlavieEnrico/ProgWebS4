@@ -52,11 +52,19 @@ export default {
         .sort((a, b) => a.name.localeCompare(b.name) * reversed)
     }
 	},
+  watch: {
+    search: function(newSearch) {
+      localStorage.setItem("search", newSearch);
+    },
+    bugsSortType: function(newBugsSortType) {
+      localStorage.setItem("bugsSortType", newBugsSortType)
+    }
+  },
   data() {
     return {
         bugsData: [],
-        search: "",
-        bugsSortType: "AZName"
+        search: localStorage.getItem("search") || "",
+        bugsSortType: localStorage.getItem("bugsSortType") || "AZName"
     }
   },
   created: function() {
