@@ -3,14 +3,17 @@
     <AppHeader/>
     <div class="collection">
       <div class="collection-options">
-				<input type="text" v-model="search" placeholder="Find a critter">
-        <button v-if="search" @click="cleanSearch">X</button>
-        <label for="bug-sort">Order by : </label>
-				<select v-model="bugsSortType" id="bug-sort">
-          <option value="AZName">Names from A to Z</option>
-          <option value="ZAName">Names from Z to A</option>
-				</select>
-        
+        <div>
+          <input type="text" v-model="search" placeholder="Find a critter">
+          <button v-if="search" @click="cleanSearch">X</button>
+        </div>
+        <div>
+          <label for="bug-sort">Order by : </label>
+          <select v-model="bugsSortType" id="bug-sort">
+            <option value="AZName">Names from A to Z</option>
+            <option value="ZAName">Names from Z to A</option>
+          </select>
+        </div>
       </div>
       <div class="card" v-for="(bug, index) in bugsOrganizedData" :key="index">
         <CreatureCard 
@@ -18,7 +21,11 @@
         :picture="bug['icon_uri']"
         />
       </div>
+      <div v-if="bugsOrganizedData.length==0" id="if-no-bugs">
+        No Match found.
+      </div>
     </div>
+    <AppFooter/>
   </div>
 </template>
 
@@ -26,6 +33,7 @@
 import CreatureCard from './components/Creature.vue'
 import AppHeader from './components/AppHeader.vue'
 import {getBugsData} from '@/services/api/acnhAPI.js'
+import AppFooter from './components/AppFooter.vue'
 
 
 export default {
@@ -33,11 +41,12 @@ export default {
   components: {
     CreatureCard,
     AppHeader,
+    AppFooter, 
   },
   computed: {
 		bugsOrganizedData: function() {
-      //const field = ["AZName"].includes(this.bugsSortType) ? "name" : "name"
       const reversed = ["ZAName"].includes(this.bugsSortType) ? -1 : 1
+      
       return this.bugsData
         .filter((a) => a.name.toLowerCase().includes(this.search.toLowerCase()))
         .sort((a, b) => a.name.localeCompare(b.name) * reversed)
@@ -54,30 +63,39 @@ export default {
     this.retrieveBugsData()
   },
   methods: {
-      async retrieveBugsData() {
-        this.bugsData = await getBugsData();
-        console.log(this.bugsData);
-      },
-      cleanSearch: function() {
-      this.search = ""
-		}	
+    async retrieveBugsData() {
+      this.bugsData = await getBugsData();
+      console.log(this.bugsData);
+    },
+    cleanSearch: function() {
+    this.search = ""
+		}
   }
 }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;900&display=swap');
 html {
   background-color: palegoldenrod;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
+
+a {
+  color:#2c3e50;
+  text-decoration: none;
+}
+
+
 
 .collection {
   display: flex;
@@ -92,6 +110,12 @@ html {
 .collection-options {
   width:100%;
   margin: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.collection-options div * {
+  margin: 10px;
 }
 
 .card {
@@ -100,6 +124,12 @@ html {
   padding: 10px;
   box-shadow: 0px 0px 10px lightgrey;
   border-radius: 25px;
+  transition: box-shadow 0.5s;
+}
+
+.card:hover {
+  text-decoration: underline;
+  box-shadow: 0px 0px 10px #2c3e50;
 }
 
 @media (max-width: 600px) {

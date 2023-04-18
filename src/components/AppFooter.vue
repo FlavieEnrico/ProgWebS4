@@ -1,6 +1,6 @@
 <template>
-    <div class="app-header">
-        <h1>ACNH Critterpedia</h1>
+    <div class="app-footer">
+        <p>Credits to <a href="https://acnhapi.com/"> ACNH API</a></p>
     </div>
 </template>
 
@@ -11,8 +11,7 @@
 </script>
 
 <style scoped>
-    h1 {
-        
+    .app-footer {
         color: #404040;
     }
 </style>

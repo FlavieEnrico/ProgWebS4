@@ -33,6 +33,7 @@
 </script>
 
 <style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;900&display=swap');
     .picture {
         width:50%;
     }
