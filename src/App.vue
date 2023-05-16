@@ -2,19 +2,7 @@
   <div class="my-app">
     <AppHeader/>
     <div class="collection">
-      <div class="collection-options">
-        <div>
-          <input type="text" v-model="search" placeholder="Find a critter">
-          <button v-if="search" @click="cleanSearch">X</button>
-        </div>
-        <div>
-          <label for="bug-sort">Order by : </label>
-          <select v-model="bugsSortType" id="bug-sort">
-            <option value="AZName">Names from A to Z</option>
-            <option value="ZAName">Names from Z to A</option>
-          </select>
-        </div>
-      </div>
+      <OptionsCreature v-model:search="search" v-model:bugsSortType="bugsSortType"/>
       <div class="card" v-for="(bug, index) in bugsOrganizedData" :key="index">
         <CreatureCard 
         :name="bug['name']" 
@@ -34,6 +22,7 @@ import CreatureCard from './components/Creature.vue'
 import AppHeader from './components/AppHeader.vue'
 import {getBugsData} from '@/services/api/acnhAPI.js'
 import AppFooter from './components/AppFooter.vue'
+import OptionsCreature from './components/OptionsCreature.vue'
 
 
 export default {
@@ -42,6 +31,7 @@ export default {
     CreatureCard,
     AppHeader,
     AppFooter, 
+    OptionsCreature,
   },
   computed: {
 		bugsOrganizedData: function() {
@@ -52,14 +42,6 @@ export default {
         .sort((a, b) => a.name.localeCompare(b.name) * reversed)
     }
 	},
-  watch: {
-    search: function(newSearch) {
-      localStorage.setItem("search", newSearch);
-    },
-    bugsSortType: function(newBugsSortType) {
-      localStorage.setItem("bugsSortType", newBugsSortType)
-    }
-  },
   data() {
     return {
         bugsData: [],
@@ -75,9 +57,6 @@ export default {
       this.bugsData = await getBugsData();
       console.log(this.bugsData);
     },
-    cleanSearch: function() {
-    this.search = ""
-		}
   }
 }
 </script>
