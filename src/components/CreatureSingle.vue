@@ -85,4 +85,12 @@ import {getBugDataByName} from '@/services/api/acnhAPI.js'
     a:hover {
         text-decoration: underline;
     }
+    @media (max-width: 600px) {
+        #my_single div {
+            flex-direction: column;
+        }
+        #my_single div div {
+            width:80%;
+        }
+    }
 </style>
