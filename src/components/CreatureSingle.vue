@@ -68,9 +68,9 @@ import {getBugDataByName} from '@/services/api/acnhAPI.js'
         align-items: center;
         flex-direction: row;
         text-align: left;
-        padding: 0%;
     }
-    ul {
+
+    #my_single div div {
         width:50%;
     }
     img {
