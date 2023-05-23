@@ -45,4 +45,15 @@ export default {
 </script>
 
 <style scoped>
+.collection-options {
+  width:100%;
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.collection-options div * {
+  margin: 10px;
+}
 </style>
