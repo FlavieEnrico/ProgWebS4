@@ -10,7 +10,7 @@
             />
             </router-link>
         </div>
-        <div v-if="bugsOrganizedData.length==0" class="if-no-bugs">
+        <div v-if="bugsOrganizedData.length==0" class="ifNoBugs">
             No Match found.
         </div>
         </div>
@@ -84,7 +84,7 @@ import OptionsCreature from './OptionsCreature.vue'
   box-shadow: 0px 0px 10px #2c3e50;
 }
 
-.if-no-bugs {
+.ifNoBugs {
   min-height: 200px;
   display: flex;
   align-items: center;

@@ -1,5 +1,5 @@
 <template>
-    <div id="my_single">
+    <div id="mySingle">
         <a href="../">◄ Go back to main page.</a>
         <h1>{{ bugData ? capitalizeString(bugData.name) : 'Loading...' }}</h1>
         <div>
@@ -53,7 +53,7 @@ import {getBugDataByName} from '@/services/api/acnhAPI.js'
 </script>
 
 <style scoped>
-    #my_single {
+    #mySingle {
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
@@ -62,7 +62,7 @@ import {getBugDataByName} from '@/services/api/acnhAPI.js'
         margin: 25px;
         height: 90%;
     }
-    #my_single div {
+    #mySingle div {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -70,7 +70,7 @@ import {getBugDataByName} from '@/services/api/acnhAPI.js'
         text-align: left;
     }
 
-    #my_single div div {
+    #mySingle div div {
         width:50%;
     }
     img {
@@ -86,10 +86,10 @@ import {getBugDataByName} from '@/services/api/acnhAPI.js'
         text-decoration: underline;
     }
     @media (max-width: 600px) {
-        #my_single div {
+        #mySingle div {
             flex-direction: column;
         }
-        #my_single div div {
+        #mySingle div div {
             width:80%;
         }
     }

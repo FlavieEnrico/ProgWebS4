@@ -1,5 +1,5 @@
 <template>
-    <div class="creature-card">
+    <div class="creatureCard">
         <img class="picture" :src="picture">
         <div>
         <a href="" class="name">{{capitalizeString(name) || 'Unknown name'}}</a>
@@ -37,7 +37,7 @@
     .picture {
         width:50%;
     }
-    .creature-card {
+    .creatureCard {
         text-align: center;
     }
 </style>
